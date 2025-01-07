@@ -35,7 +35,7 @@ validate:
 destroy:
   stage: destroy
   script:
-    - terraform destroy -auto-approve 
+    - terraform destroy  
     
   when: manual 
   only:
