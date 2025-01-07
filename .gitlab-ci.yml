@@ -1,6 +1,6 @@
 stages:
   - validate
-  - plan
+#  - plan
   - apply
 
 variables:
@@ -31,12 +31,6 @@ validate:
   script:
   #  - cd $TF_ROOT
     - terraform init 
-    
-plan:
-  stage: plan
-  script:
-   # - cd $TF_ROOT
-   
     - terraform plan -out=tf
   
 apply:
