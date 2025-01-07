@@ -37,14 +37,14 @@ plan:
   script:
    # - cd $TF_ROOT
    
-    - terraform plan -out=tfplan
+    - terraform plan -out=tf
   
 apply:
   stage: apply
   script:
-    - cd $TF_ROOT
-    - terraform init $TF_BACKEND_CONFIG
-    - terraform apply -auto-approve
+  #  - cd $TF_ROOT
+  #  - terraform init $TF_BACKEND_CONFIG
+    - terraform apply 
   when: manual
   only:
     - main
