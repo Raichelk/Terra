@@ -1,5 +1,6 @@
 stages:
   - validate
+  - destroy
 
 #variables:
 #  TF_ROOT: "terraform" # The folder where Terraform configuration resides
