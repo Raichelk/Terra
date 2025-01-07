@@ -39,8 +39,8 @@ validate:
 plan:
   stage: plan
   script:
-    - cd $TF_ROOT
-    - terraform init $TF_BACKEND_CONFIG
+   # - cd $TF_ROOT
+    - terraform init 
     - terraform plan -out=tfplan
   artifacts:
     paths:
