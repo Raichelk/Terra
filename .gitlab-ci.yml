@@ -8,8 +8,8 @@ variables:
   TF_BACKEND_CONFIG: "-backend-config=bucket=my-tf-state -backend-config=key=terraform/state -backend-config=region=us-east-1"
 
 before_script:
-  - sudo apt update
-  - sudo apt install -y gnupg software-properties-common curl
+  -  apt update
+  -  apt install -y gnupg software-properties-common curl
 
   - curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor > /usr/share/keyrings/hashicorp-archive-keyring.gpg
   - apt-get update && apt-get install -y terraform
