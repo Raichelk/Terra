@@ -1,0 +1,46 @@
+stages:
+  - validate
+  - plan
+  - apply
+
+variables:
+  TF_ROOT: "terraform" # The folder where Terraform configuration resides
+  TF_BACKEND_CONFIG: "-backend-config=bucket=my-tf-state -backend-config=key=terraform/state -backend-config=region=us-east-1"
+
+before_script:
+  - apk add --no-cache curl bash git
+  - curl -fsSL https://apt.releases.hashicorp.com/gpg | gpg --dearmor > /usr/share/keyrings/hashicorp-archive-keyring.gpg
+  - apt-get update && apt-get install -y terraform
+
+validate:
+  stage: validate
+  script:
+    - cd $TF_ROOT
+    - terraform init $TF_BACKEND_CONFIG
+    - terraform validate
+  only:
+    - merge_requests
+    - main
+
+plan:
+  stage: plan
+  script:
+    - cd $TF_ROOT
+    - terraform init $TF_BACKEND_CONFIG
+    - terraform plan -out=tfplan
+  artifacts:
+    paths:
+      - $TF_ROOT/tfplan
+  only:
+    - merge_requests
+    - main
+
+apply:
+  stage: apply
+  script:
+    - cd $TF_ROOT
+    - terraform init $TF_BACKEND_CONFIG
+    - terraform apply -auto-approve
+  when: manual
+  only:
+    - main
