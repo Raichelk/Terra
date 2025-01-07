@@ -29,26 +29,16 @@ before_script:
 validate:
   stage: validate
   script:
-    - cd $TF_ROOT
-    - terraform init $TF_BACKEND_CONFIG
-    - terraform validate
-  only:
-    - merge_requests
-    - main
-
+  #  - cd $TF_ROOT
+    - terraform init 
+    
 plan:
   stage: plan
   script:
    # - cd $TF_ROOT
-    - terraform init 
+   
     - terraform plan -out=tfplan
-  artifacts:
-    paths:
-      - $TF_ROOT/tfplan
-  only:
-    - merge_requests
-    - main
-
+  
 apply:
   stage: apply
   script:
