@@ -1,7 +1,5 @@
 stages:
   - validate
-#  - plan
-  - apply
 
 variables:
   TF_ROOT: "terraform" # The folder where Terraform configuration resides
@@ -32,13 +30,7 @@ validate:
   #  - cd $TF_ROOT
     - terraform init 
     - terraform plan -out=tf
-  
-apply:
-  stage: apply
-  script:
-  #  - cd $TF_ROOT
-  #  - terraform init $TF_BACKEND_CONFIG
     - terraform apply 
-  when: manual
+ # when: manual
   only:
     - main
