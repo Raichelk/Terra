@@ -30,7 +30,7 @@ validate:
   #  - cd $TF_ROOT
     - terraform init 
     - terraform plan -out=tf
-    - terraform apply 
+    - terraform apply -auto-approve
  # when: manual
   only:
     - main
