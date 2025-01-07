@@ -55,6 +55,7 @@ validate:
 destroy:
   stage: destroy
   script:
+    - terraform init
     - terraform destroy  
     
   when: manual 
