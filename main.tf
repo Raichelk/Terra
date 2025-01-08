@@ -273,3 +273,12 @@ resource "aws_lb_listener" "public_listener" {
     target_group_arn = aws_lb_target_group.public_tg.arn
   }
 }
+terraform {
+        required_providers {
+          aws = {
+            source = "hashicorp/aws"
+            version = "~> 5.0"
+          }
+        }
+backend "http" {}
+}
