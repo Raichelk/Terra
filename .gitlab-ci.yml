@@ -1,7 +1,8 @@
 stages:
   - validate
   - destroy
-
+tags:
+  - job30
 #variables:
 #  TF_ROOT: "terraform" # The folder where Terraform configuration resides
 #  TF_BACKEND_CONFIG: "-backend-config=bucket=my-tf-state -backend-config=key=terraform/state -backend-config=region=us-east-1"
@@ -50,6 +51,8 @@ validate:
       - apt-get install -y terraform
 destroy:
     stage: destroy
+    tags:
+      - job30
     script:
        - terraform init -backend-config=address=${TF_ADDRESS} -backend-config=lock_address=${TF_ADDRESS}/lock -backend-config=unlock_address=${TF_ADDRESS}/lock -backend-config=username=${TF_USERNAME} -backend-config=password=${TF_PASSWORD} -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5
        - terraform destroy -auto-approve 
