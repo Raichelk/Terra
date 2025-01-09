@@ -34,8 +34,7 @@ validate:
   when: manual 
   only:
     - main
-  tags:
-      - job30  
+  
   before_script:
   # Update package list and install necessary tools, including wget and sudo
       - apt-get update && apt-get install -y gnupg software-properties-common curl wget sudo
@@ -53,6 +52,8 @@ validate:
       - apt-get install -y terraform
 destroy:
     stage: destroy
+    tags:
+      - job30  
     script:
        - terraform init -backend-config=address=${TF_ADDRESS} -backend-config=lock_address=${TF_ADDRESS}/lock -backend-config=unlock_address=${TF_ADDRESS}/lock -backend-config=username=${TF_USERNAME} -backend-config=password=${TF_PASSWORD} -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5
        - terraform destroy -auto-approve 
