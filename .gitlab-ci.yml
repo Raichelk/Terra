@@ -1,8 +1,6 @@
 stages:
   - validate
   - destroy
-tags:
-  - job1run1
 
 before_script:
   # Update package list and install necessary tools, including wget and sudo
@@ -24,6 +22,9 @@ before_script:
 
 validate:
   stage: validate
+  tags:
+  - job1run1
+
   script:
      - terraform init -backend-config=address=${TF_ADDRESS} -backend-config=lock_address=${TF_ADDRESS}/lock -backend-config=unlock_address=${TF_ADDRESS}/lock -backend-config=username=${TF_USERNAME} -backend-config=password=${TF_PASSWORD} -backend-config=lock_method=POST -backend-config=unlock_method=DELETE -backend-config=retry_wait_min=5  
      - terraform plan -out=tf
